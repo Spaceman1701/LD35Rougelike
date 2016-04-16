@@ -2,9 +2,11 @@
 using System.Collections;
 using UnityEngine.UI; //for abilities
 
-public class Unit : MonoBehaviour {
+public class Unit : MonoBehaviour, ILevelable {
 
-    public float maxHealth;
+	public int level;
+
+	public float maxHealth;
     public float maxStamina;
 
     public float health;

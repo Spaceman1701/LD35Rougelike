@@ -2,9 +2,11 @@
 using System.Collections;
 
 [RequireComponent (typeof(Unit))]
-public abstract class Ability : MonoBehaviour {
+public abstract class Ability : MonoBehaviour, ILevelable {
 
-    public float baseCooldown;
+	public int level;
+
+	public float baseCooldown;
 
     public float cooldown;
 
