@@ -4,9 +4,10 @@ using System.Collections;
 public class PlayerMovement : MonoBehaviour {
 
 	public float speed = 1.5f;
+    public int movImportance;
     private int currImportance;
-	private Vector3 target;
     private Rigidbody2D playerBody;
+    private Vector2 flagLoc;
 
     //Accessors
     public Vector2 position;
@@ -19,7 +20,7 @@ public class PlayerMovement : MonoBehaviour {
 
 	void Start () 
 	{
-		target = transform.position;
+		flagLoc = transform.position;
         currImportance = 0;
         playerBody = GetComponent<Rigidbody2D>();
 	}
@@ -27,28 +28,30 @@ public class PlayerMovement : MonoBehaviour {
 	void Update () {
 		if (Input.GetMouseButton(1)) 
 		{
-			target = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-			target.z = transform.position.z;
+			flagLoc = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 		}
-        RotateToTarget(target);
+        RotateToTarget(flagLoc);
 		MoveUnit ();
 
 	}
 
 	void MoveUnit ()
 	{
-		transform.position = Vector3.MoveTowards(transform.position, target, speed * Time.deltaTime);
-		Debug.DrawLine (transform.position, target, Color.red);
+		if(movImportance > currImportance)
+        {
+
+        }
 	}
 
-    private void RotateToTarget(Vector3 target)
+    private void RotateToTarget(Vector2 flagLoc)
     {
-        Vector3 direction = target - transform.position;
-        direction.Normalize();
+        
+        Vector2 direction = flagLoc - playerBody.position;
+        
 
-        float dir = Mathf.Atan2(direction.y, direction.x);
-
-        transform.rotation = Quaternion.AngleAxis(dir*Mathf.Rad2Deg + 90, Vector3.forward);
+        float dir = 90 + Mathf.Atan2(direction.y, direction.x) * 180 / Mathf.PI;
+        playerBody.MoveRotation(dir + 10 * Time.deltaTime);
+        
     }
 
 
