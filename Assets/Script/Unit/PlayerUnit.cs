@@ -41,5 +41,15 @@ public class PlayerUnit : Unit {
         {
             return new Vector2(relativeMouse.x, relativeMouse.y);
         }
+    }
+    
+    protected override void OnMoveStart()
+    {
+
     }   
+
+    protected override void OnMoveEnd()
+    {
+
+    }
 }
