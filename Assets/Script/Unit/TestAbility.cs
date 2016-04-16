@@ -11,7 +11,8 @@ public class TestAbility : Ability {
         {
             StartCooldown();
 
-            GameObject o = Instantiate(projectile);
+            GameObject o = (GameObject)Instantiate(projectile, 
+                new Vector3(playerUnit.RelativeOrigin.x, playerUnit.RelativeOrigin.y, 0), Quaternion.identity);
             o.GetComponent<Rigidbody2D>().velocity = playerUnit.RelativeMouse.normalized * 10;
         }
     }

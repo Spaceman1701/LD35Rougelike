@@ -74,4 +74,12 @@ public abstract class Unit : MonoBehaviour, ILevelable {
             a.StopAnimate();
         }
     }
+
+    public Vector2 RelativeOrigin
+    {
+        get
+        {
+            return transform.position;
+        }
+    }
 }

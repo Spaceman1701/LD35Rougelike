@@ -22,18 +22,22 @@ public class HumanAnimation : MonoBehaviour, Animate {
             StartAnimate();
         }
     }
-    
-    
+
+
     public void StartAnimate()
     {
-        InvokeRepeating("NextFrame", 0.0f, frameTime);
-        running = true;
+        if (!running) { 
+            InvokeRepeating("NextFrame", 0.0f, frameTime);
+            running = true;
+        }
     }
 
     public void StopAnimate()
     {
-        CancelInvoke("NextFrame");
-        running = false;
+        if (running) { 
+            CancelInvoke("NextFrame");
+            running = false;
+        }
     }
 
     private void NextFrame()
