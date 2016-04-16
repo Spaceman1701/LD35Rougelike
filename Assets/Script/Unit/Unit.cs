@@ -32,6 +32,8 @@ public abstract class Unit : MonoBehaviour, ILevelable {
 
     protected abstract void OnStart();
     protected abstract void OnUpdate();
+    protected abstract void OnMoveStart();
+    protected abstract void OnMoveEnd();
 	// Update is called once per frame
 	void Update()
     {
@@ -47,6 +49,29 @@ public abstract class Unit : MonoBehaviour, ILevelable {
         set
         {
             level = value;
+        }
+    }
+
+    public void StartMoving()
+    {
+        OnMoveStart();
+
+
+        Animate[] moveAnimation = GetComponentsInChildren<Animate>();
+        foreach (Animate a in moveAnimation)
+        {
+            a.StartAnimate();
+        }
+    }
+
+    public void EndMoving()
+    {
+        OnMoveEnd();
+
+        Animate[] moveAnimation = GetComponentsInChildren<Animate>();
+        foreach (Animate a in moveAnimation)
+        {
+            a.StopAnimate();
         }
     }
 }
