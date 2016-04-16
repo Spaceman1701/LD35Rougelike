@@ -1,8 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
-[RequireComponent (typeof(Unit))]
+[RequireComponent (typeof(PlayerUnit))]
 public abstract class Ability : MonoBehaviour, ILevelable {
+    private const float COOLDOWN_UPATE_RATE = 0.1f;
 
 	public int level;
 
@@ -11,6 +13,8 @@ public abstract class Ability : MonoBehaviour, ILevelable {
     public float cooldown;
 
     protected float cooldownReduction;
+
+    public PlayerUnit playerUnit;
 
     public abstract void OnCast();
 
@@ -22,6 +26,27 @@ public abstract class Ability : MonoBehaviour, ILevelable {
     public void SetCooldown(float cooldown)
     {
         this.cooldown = cooldown;
+    }
+
+    public void StartCooldown()
+    {
+        cooldown = baseCooldown;
+        InvokeRepeating("IncrementCooldown", 0, COOLDOWN_UPATE_RATE);
+    }
+
+    private void IncrementCooldown()
+    {
+        cooldown -= COOLDOWN_UPATE_RATE;
+        if (cooldown <= 0.0)
+        {
+            CancelInvoke("IncrementCooldown");
+            cooldown = 0;
+        }
+    }
+
+    public bool OffCooldown()
+    {
+        return cooldown == 0;
     }
 
     public float BaseCooldown
@@ -37,6 +62,18 @@ public abstract class Ability : MonoBehaviour, ILevelable {
         get
         {
             return cooldown;
+        }
+    }
+
+    public int Level
+    {
+        get
+        {
+            return level;
+        }
+        set
+        {
+            level = value;
         }
     }
 }

@@ -3,7 +3,7 @@ using System.Collections;
 
 public interface ILevelable {
 
-	int level {
+	int Level {
 		get;
 
 		set;

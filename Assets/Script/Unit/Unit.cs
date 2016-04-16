@@ -2,7 +2,7 @@
 using System.Collections;
 using UnityEngine.UI; //for abilities
 
-public class Unit : MonoBehaviour, ILevelable {
+public abstract class Unit : MonoBehaviour, ILevelable {
 
 	public int level;
 
@@ -26,11 +26,27 @@ public class Unit : MonoBehaviour, ILevelable {
 
         healthRegenRate = baseHealthRegen;
         staminaRegenRate = baseStaminaRegen;
+
+        OnStart();
 	}
-	
+
+    protected abstract void OnStart();
+    protected abstract void OnUpdate();
 	// Update is called once per frame
 	void Update()
     {
-	    
+        OnUpdate();
 	}
+
+    public int Level
+    {
+        get
+        {
+            return level;
+        }
+        set
+        {
+            level = value;
+        }
+    }
 }
