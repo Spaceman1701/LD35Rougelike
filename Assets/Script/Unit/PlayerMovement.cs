@@ -3,7 +3,7 @@ using System.Collections;
 
 [RequireComponent(typeof(PlayerUnit))]
 public class PlayerMovement : MonoBehaviour {
-    private const float EPILSON = 0.07f;
+	private const float EPSILON = 0.07f;
 
 	public float speed = 1.5f;
     //public int movImportance;
@@ -44,7 +44,7 @@ public class PlayerMovement : MonoBehaviour {
         {
             Vector2 direction = waypoint - new Vector2(transform.position.x, transform.position.y);
             
-            if (direction.magnitude < EPILSON)
+            if (direction.magnitude < EPSILON)
             {
                 movingToWaypoint = false;
                 SetVelocity(new Vector2(0,0), 1);
