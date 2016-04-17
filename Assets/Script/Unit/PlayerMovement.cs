@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[RequireComponent(typeof(PlayerUnit))]
 public class PlayerMovement : MonoBehaviour {
     private const float EPILSON = 0.07f;
 
@@ -38,6 +39,7 @@ public class PlayerMovement : MonoBehaviour {
             SetVelocity(direction*speed, 100);
             SetImportance(0);
             movingToWaypoint = true;
+            GetComponent<PlayerUnit>().StartMoving();
         } else if (movingToWaypoint)
         {
             Vector2 direction = waypoint - new Vector2(transform.position.x, transform.position.y);
@@ -46,7 +48,7 @@ public class PlayerMovement : MonoBehaviour {
             {
                 movingToWaypoint = false;
                 SetVelocity(new Vector2(0,0), 1);
-                
+                GetComponent<PlayerUnit>().EndMoving();
             } else
             {
 
