@@ -12,7 +12,7 @@ public class HUDManager : MonoBehaviour {
 	void Update () {
 		HealthBar healthBar = GetComponent <HealthBar>();
 		StaminaBar staminaBar = GetComponent <StaminaBar>();
-		healthBar.SetHealth (5, 10);
-		staminaBar.SetStamina (657, 1000);
+		healthBar.SetHealth (247, 550);
+		staminaBar.SetStamina (500, 1000);
 	}
 }

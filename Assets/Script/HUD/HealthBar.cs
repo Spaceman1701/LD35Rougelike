@@ -4,7 +4,7 @@ using UnityEngine.UI;
 public class HealthBar : MonoBehaviour {
 
 	[SerializeField]
-	private RectTransform healthBarRect;
+	private RectTransform healthBarCover;
 	[SerializeField]
 	private Text healthText;
 	/*
@@ -21,9 +21,9 @@ public class HealthBar : MonoBehaviour {
 	*/ //These were always showing even though it all worked properly.  Decided to just leave then in here and pretend like it never happened.  They won't look at this anyway
 	public void SetHealth(int cur, int max)
 	{
-		float value = (float)cur / max;
+		float value = 910 * (1- (float)cur / max);
 
-		healthBarRect.localScale = new Vector3 (value, healthBarRect.localScale.y, healthBarRect.localScale.z);
+		healthBarCover.localScale = new Vector3 (value, healthBarCover.localScale.y, healthBarCover.localScale.z);
 		healthText.text = cur + " / " + max;
 	}
 }
