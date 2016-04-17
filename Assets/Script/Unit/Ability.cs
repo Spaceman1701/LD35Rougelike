@@ -76,4 +76,14 @@ public abstract class Ability : MonoBehaviour, ILevelable {
             level = value;
         }
     }
+
+    public abstract string Description
+    {
+        get;
+    } 
+
+    public abstract string Title
+    {
+        get;
+    }
 }

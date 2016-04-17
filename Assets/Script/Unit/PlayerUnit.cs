@@ -6,6 +6,8 @@ public class PlayerUnit : Unit {
     public Vector2 relativeMouse;
 
     public Ability abilityOne;
+    public Ability abilityTwo;
+    public Ability abilityThree;
 
     protected override void OnStart()
     {
@@ -27,6 +29,18 @@ public class PlayerUnit : Unit {
         if (Input.GetButtonDown("Ability1"))
         {
             abilityOne.OnCast();
+        }
+        if (Input.GetButtonDown("Ability2"))
+        {
+            abilityTwo.OnCast();
+        }
+        if (Input.GetButtonDown("Ability3"))
+        {
+            abilityThree.OnCast();
+        }
+        if (Input.GetButtonDown("Ability4"))
+        {
+
         }
     }
 

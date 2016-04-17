@@ -26,4 +26,20 @@ public class TestAbility : Ability {
 	void Update () {
 	
 	}
+
+    public override string Title
+    {
+        get
+        {
+            return "TestAbility!";
+        }
+    }
+
+    public override string Description
+    {
+        get
+        {
+            return "MASSIVE DAMAGE. MUCH WOW. VERY SKILLSHOT";
+        }
+    }
 }

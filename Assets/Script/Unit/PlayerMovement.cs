@@ -2,10 +2,11 @@
 using System.Collections;
 
 public class PlayerMovement : MonoBehaviour {
+    private const float EPILSON = 0.07f;
 
 	public float speed = 1.5f;
-    public int movImportance;
-    private int currImportance;
+    //public int movImportance;
+    public int currImportance;
     private Rigidbody2D playerBody;
     private Vector2 flagLoc;
 
@@ -15,8 +16,11 @@ public class PlayerMovement : MonoBehaviour {
     public float rotation;
     public float angularVelocity;
 
+    private Vector2 waypoint;
 
     private bool Moving;
+
+    public bool movingToWaypoint = false;
 
 	void Start () 
 	{
@@ -26,29 +30,36 @@ public class PlayerMovement : MonoBehaviour {
 	}
 
 	void Update () {
-		if (Input.GetMouseButton(1)) 
-		{
-			flagLoc = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-		}
-        RotateToTarget(flagLoc);
-		MoveUnit ();
-
-	}
-
-	void MoveUnit ()
-	{
-		if(movImportance > currImportance)
+        if (Input.GetButtonDown("right_mouse_button"))
         {
+            waypoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            Vector2 direction = waypoint - new Vector2(transform.position.x, transform.position.y);
+            direction.Normalize();
+            SetVelocity(direction*speed, 100);
+            SetImportance(0);
+            movingToWaypoint = true;
+        } else if (movingToWaypoint)
+        {
+            Vector2 direction = waypoint - new Vector2(transform.position.x, transform.position.y);
+            
+            if (direction.magnitude < EPILSON)
+            {
+                movingToWaypoint = false;
+                SetVelocity(new Vector2(0,0), 1);
+                
+            } else
+            {
 
+                direction.Normalize();
+                SetVelocity(direction*speed, 0);
+                RotateToTarget(direction);
+            }
         }
+
 	}
 
-    private void RotateToTarget(Vector2 flagLoc)
+    private void RotateToTarget(Vector2 direction)
     {
-        
-        Vector2 direction = flagLoc - playerBody.position;
-        
-
         float dir = 90 + Mathf.Atan2(direction.y, direction.x) * 180 / Mathf.PI;
         playerBody.MoveRotation(dir + 10 * Time.deltaTime);
         
