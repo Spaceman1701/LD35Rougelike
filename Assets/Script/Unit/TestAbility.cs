@@ -19,7 +19,7 @@ public class TestAbility : Ability {
     
     // Use this for initialization
 	void Start () {
-	
+        loadIcon("TestAbility");
 	}
 	
 	// Update is called once per frame

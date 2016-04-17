@@ -18,6 +18,8 @@ public abstract class Unit : MonoBehaviour, ILevelable {
     public float baseHealthRegen;
     public float baseStaminaRegen;
 
+    public float cdrPercent;
+
     // Use this for initialization
     void Start()
     {
@@ -34,9 +36,22 @@ public abstract class Unit : MonoBehaviour, ILevelable {
     protected abstract void OnUpdate();
     protected abstract void OnMoveStart();
     protected abstract void OnMoveEnd();
+    protected abstract void OnDeath();
 	// Update is called once per frame
 	void Update()
     {
+        if (health <= 0)
+        {
+            ZeroHealthListener[] listeners = GetComponentsInChildren<ZeroHealthListener>();
+            foreach (ZeroHealthListener h in listeners)
+            {
+                h.OnZeroHealth();
+            }
+            if (health <= 0)
+            {
+                OnDeath();
+            }
+        }
         OnUpdate();
 	}
 
@@ -85,19 +100,38 @@ public abstract class Unit : MonoBehaviour, ILevelable {
 
     public void Damage(float damage)
     {
-        health -= damage;
-        if (health < 0)
+        DamageListener[] listeners = GetComponentsInChildren<DamageListener>();
+        foreach (DamageListener l in listeners)
         {
-
+            l.OnDamageTaken(damage);
         }
+        health -= damage;
     }
 
     public void Heal(float amount)
     {
+        HealListener[] listeners = GetComponentsInChildren<HealListener>();
+        foreach (HealListener l in listeners)
+        {
+            l.OnHeal(amount);
+        }
+
         health += amount;
         if (health > maxHealth)
         {
             health = maxHealth;
+        }
+    }
+
+    public float CDR
+    {
+        get
+        {
+            return cdrPercent;
+        }
+        set
+        {
+            cdrPercent = value;
         }
     }
 }

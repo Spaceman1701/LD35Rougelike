@@ -4,6 +4,9 @@ using System;
 
 [RequireComponent (typeof(PlayerUnit))]
 public abstract class Ability : MonoBehaviour, ILevelable {
+
+    private const string DEFAULT_ABILITY_FOLDER = "Sprite/Ability/"; 
+
     private const float COOLDOWN_UPATE_RATE = 0.1f;
 
 	public int level;
@@ -17,6 +20,13 @@ public abstract class Ability : MonoBehaviour, ILevelable {
     public PlayerUnit playerUnit;
 
     public abstract void OnCast();
+
+    private Sprite icon;
+
+    public void loadIcon(String name)
+    {
+        icon = Resources.Load<Sprite>(DEFAULT_ABILITY_FOLDER + name);
+    }
 
     public void SetCooldownReducation(float cdr)
     {
@@ -85,5 +95,18 @@ public abstract class Ability : MonoBehaviour, ILevelable {
     public abstract string Title
     {
         get;
+    }
+
+    public Sprite Icon
+    {
+        get
+        {
+            return icon;
+        }
+    }
+
+    public bool isSpriteLoaded()
+    {
+        return icon == null;
     }
 }

@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 public class PlayerUnit : Unit {
 
@@ -8,11 +9,17 @@ public class PlayerUnit : Unit {
     public Ability abilityOne;
     public Ability abilityTwo;
     public Ability abilityThree;
+    public Ability abilityFour;
 
     protected override void OnStart()
     {
         UpdateRelativeMouse();
         //StartMoving();
+    }
+
+    protected override void OnDeath()
+    {
+        
     }
 
     protected override void OnUpdate()
@@ -28,19 +35,30 @@ public class PlayerUnit : Unit {
     {
         if (Input.GetButtonDown("Ability1"))
         {
-            abilityOne.OnCast();
+            if (abilityOne != null)
+            {
+                abilityOne.OnCast();
+            }
         }
         if (Input.GetButtonDown("Ability2"))
         {
-            abilityTwo.OnCast();
+            if (abilityTwo != null)
+            {
+                abilityTwo.OnCast();
+            }
         }
         if (Input.GetButtonDown("Ability3"))
         {
-            abilityThree.OnCast();
+            if (abilityThree != null)
+            {
+                abilityThree.OnCast();
+            }
         }
         if (Input.GetButtonDown("Ability4"))
         {
-
+            if (abilityFour != null) { 
+                abilityFour.OnCast();
+            }
         }
     }
 
