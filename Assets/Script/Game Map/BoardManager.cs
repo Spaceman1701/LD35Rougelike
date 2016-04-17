@@ -56,7 +56,7 @@ public class BoardManager : MonoBehaviour {
 				{
 					toInstantiate = outerWallTiles [Random.Range (0, outerWallTiles.Length)];
 				}
-					GameObject instance = Instantiate (toInstantiate, new Vector3 (x, y, 0f), Quaternion.identity) as GameObject;
+					GameObject instance = Instantiate (toInstantiate, new Vector3 (x, y, 0f), RandomRot()) as GameObject;
 
 					instance.transform.SetParent (boardHolder);
 				}
@@ -82,6 +82,14 @@ public class BoardManager : MonoBehaviour {
 			Instantiate (tileChoice, randomPosition, Quaternion.identity);
 		}
 	}
+
+    private Quaternion RandomRot()
+    {
+        Vector3 axis = Vector3.forward;
+        Quaternion[] qs = { Quaternion.AngleAxis(90, axis), Quaternion.AngleAxis(180, axis), Quaternion.AngleAxis(270, axis) };
+
+        return qs[Random.Range(0, 3)];
+    }
 
 	public void SetupScene (int stage)
 	{

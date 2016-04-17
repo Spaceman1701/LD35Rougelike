@@ -82,4 +82,22 @@ public abstract class Unit : MonoBehaviour, ILevelable {
             return transform.position;
         }
     }
+
+    public void Damage(float damage)
+    {
+        health -= damage;
+        if (health < 0)
+        {
+
+        }
+    }
+
+    public void Heal(float amount)
+    {
+        health += amount;
+        if (health > maxHealth)
+        {
+            health = maxHealth;
+        }
+    }
 }
