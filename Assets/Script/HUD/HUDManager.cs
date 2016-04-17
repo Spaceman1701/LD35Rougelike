@@ -10,6 +10,9 @@ public class HUDManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	
+		HealthBar healthBar = GetComponent <HealthBar>();
+		StaminaBar staminaBar = GetComponent <StaminaBar>();
+		healthBar.SetHealth (5, 10);
+		staminaBar.SetStamina (657, 1000);
 	}
 }
