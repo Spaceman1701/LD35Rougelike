@@ -12,6 +12,7 @@ public class PlayerUnit : Unit {
     protected override void OnStart()
     {
         UpdateRelativeMouse();
+        //StartMoving();
     }
 
     protected override void OnUpdate()
