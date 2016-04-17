@@ -21,6 +21,8 @@ public class PlayerMovement : MonoBehaviour {
 
     private bool Moving;
 
+    public Unit AutoTarget;
+
     public bool movingToWaypoint = false;
 
 	void Start () 
@@ -33,6 +35,7 @@ public class PlayerMovement : MonoBehaviour {
 	void Update () {
         if (Input.GetButtonDown("right_mouse_button"))
         {
+            GetComponentInChildren<PlayerAutoAttack>().CancelFollow();
             waypoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             Vector2 direction = waypoint - new Vector2(transform.position.x, transform.position.y);
             direction.Normalize();
@@ -57,8 +60,24 @@ public class PlayerMovement : MonoBehaviour {
                 RotateToTarget(direction);
             }
         }
+        if (Input.GetButtonDown("left_mouse_button"))
+        {
+            Unit u = MouseOverUnit();
+            if (u != null)
+            {
+                GetComponentInChildren<PlayerAutoAttack>().AttemptAuto(u);
+            }
+        }
 
 	}
+
+    private Unit MouseOverUnit()
+    {
+        RaycastHit2D hit = Physics2D.Raycast(new Vector2(Camera.main.ScreenToWorldPoint(Input.mousePosition).x,
+            Camera.main.ScreenToWorldPoint(Input.mousePosition).y), Vector2.zero, 0.0f);
+        Unit u = hit.rigidbody.transform.GetComponentInChildren<Unit>();
+        return u;
+    }
 
     private void RotateToTarget(Vector2 direction)
     {
