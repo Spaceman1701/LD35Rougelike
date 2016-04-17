@@ -18,7 +18,7 @@ public class ShowDescription : MonoBehaviour {
     {
         Debug.Log("TEST");
     }
-	/*void OnGUI()
+	void OnGUI()
 	{
 		GUI.depth = -10;
 
@@ -40,5 +40,5 @@ public class ShowDescription : MonoBehaviour {
 			GUI.Box (new Rect (100, 100, 100, 50), "Here is a Button");
 		}
 	
-	} */
+	}
 }

@@ -16,7 +16,8 @@ public class HUDManager : MonoBehaviour {
     void Start () {
 		Ability[] abilities  = playerGameObject.GetComponentsInChildren<Ability>();
 		float[] abilityIconXLocations = new float[4] {(float)-206.33, (float)-37.8, (float)127.5, (float)296.0};
-		float abilityIconYLocation = (float)-424.74;
+//		float abilityIconYLocation = (float)-424.74;
+		Button[] buttons = new Button[4] {ability1button, ability2button, ability3button, ability4button};
 
 		int length = abilities.Length;
 		for (int i = 0; i < 1; i++) 
@@ -25,7 +26,7 @@ public class HUDManager : MonoBehaviour {
 			{
                 Debug.Log(abilities[i].Icon == null);
                 abilities[i].ForceLoadIcon();
-                ability1button.image.overrideSprite = abilities[i].Icon;
+				buttons[i].image.overrideSprite = abilities[i].Icon;
 
                 //GUI.Button (new Rect(-206.33f, -37.8f, 150, 150), abilities[i].Icon.texture); //THERE IS NO CURRENT TEXTURE ACCESSED THIS WAY
 			}
