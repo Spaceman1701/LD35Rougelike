@@ -1,27 +1,37 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class HUDManager : MonoBehaviour {
 
 	public GameObject playerGameObject;
 	public Texture EmptyAbility;
 
-	// Use this for initialization
-	void Start () {
+    public Button ability1button;
+    public Button ability2button;
+    public Button ability3button;
+    public Button ability4button;
+
+    // Use this for initialization
+    void Start () {
 		Ability[] abilities  = playerGameObject.GetComponentsInChildren<Ability>();
 		float[] abilityIconXLocations = new float[4] {(float)-206.33, (float)-37.8, (float)127.5, (float)296.0};
 		float abilityIconYLocation = (float)-424.74;
 
 		int length = abilities.Length;
-		for (int x = 0; x < 4; x++) 
+		for (int i = 0; i < 1; i++) 
 		{
-			if (abilities[x] != null)
+			if (abilities[i] != null)
 			{
-//				GUI.Button (new Rect(abilityIconXLocations[x], abilityIconYLocation, 150, 150), abilities[x].Icon); //THERE IS NO CURRENT TEXTURE ACCESSED THIS WAY
+                Debug.Log(abilities[i].Icon == null);
+                abilities[i].ForceLoadIcon();
+                ability1button.image.overrideSprite = abilities[i].Icon;
+
+                //GUI.Button (new Rect(-206.33f, -37.8f, 150, 150), abilities[i].Icon.texture); //THERE IS NO CURRENT TEXTURE ACCESSED THIS WAY
 			}
 			else 
 			{
-				GUI.Button (new Rect(abilityIconXLocations[x], abilityIconYLocation, 150, 150), EmptyAbility); 
+				//GUI.Button (new Rect(abilityIconXLocations[i], abilityIconYLocation, 150, 150), EmptyAbility); 
 			}
 		}
 	}
@@ -30,7 +40,7 @@ public class HUDManager : MonoBehaviour {
 	void Update () {
 		HealthBar healthBar = GetComponent <HealthBar>();
 		StaminaBar staminaBar = GetComponent <StaminaBar>();
-		healthBar.SetHealth (247, 550);
-		staminaBar.SetStamina (500, 1000);
+		healthBar.SetHealth ((int)playerGameObject.GetComponent<PlayerUnit>().health, (int)playerGameObject.GetComponent<PlayerUnit>().maxHealth);
+		staminaBar.SetStamina ((int)playerGameObject.GetComponent<PlayerUnit>().stamina, (int)playerGameObject.GetComponent<PlayerUnit>().maxStamina);
 	}
 }

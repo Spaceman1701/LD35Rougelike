@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 public class TestAbility : Ability {
 
@@ -19,11 +20,20 @@ public class TestAbility : Ability {
     
     // Use this for initialization
 	void Start () {
-        loadIcon("TestAbility");
+        //loadIcon("TestAbility");
 	}
-	
-	// Update is called once per frame
-	void Update () {
+
+    public override void ForceLoadIcon()
+    {
+        Debug.Log("FORCE LOAD CALLED");
+        if (!IsIconLoaded())
+        {
+            loadIcon("TestAbility");
+        } 
+    }
+
+    // Update is called once per frame
+    void Update () {
 	
 	}
 

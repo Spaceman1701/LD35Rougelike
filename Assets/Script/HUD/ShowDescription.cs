@@ -12,7 +12,13 @@ public class ShowDescription : MonoBehaviour {
 	{
 		boolMouseOver = false;
 	}
-	void OnGUI()
+
+
+    public void ShowInfo()
+    {
+        Debug.Log("TEST");
+    }
+	/*void OnGUI()
 	{
 		GUI.depth = -10;
 
@@ -34,5 +40,5 @@ public class ShowDescription : MonoBehaviour {
 			GUI.Box (new Rect (100, 100, 100, 50), "Here is a Button");
 		}
 	
-	}
+	} */
 }
