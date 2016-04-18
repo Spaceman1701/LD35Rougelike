@@ -30,12 +30,14 @@ public class DisplayDetails : MonoBehaviour {
             string abilityDesc = abilities[abilityIndex].Description;
             string abilityTitle = abilities[abilityIndex].Title;
 
-            GUI.Label(new Rect(875, 462, 240, 30), abilityTitle);
-            GUI.Label(new Rect(875, 480, 240, 300), abilityDesc);
+            GUI.Label(new Rect(903, 523, 240, 30), abilityTitle);
+            GUI.Label(new Rect(903, 542, 240, 300), abilityDesc);
         }
     }
 
 	void OnGUI () {
+//		GUI.Label (new Rect (x, y, 240, 30), "1.7");
+//		GUI.Label(new Rect(x, y, 240, 300), "asjfhadlfkhdaslfjkgdasljkgadsjlf");
 		length = abilities.Length;
         //Ability descriptions
         if (abilityIndex != -1)
@@ -48,14 +50,17 @@ public class DisplayDetails : MonoBehaviour {
 				float cooldownTime = abilities [i].cooldown;
 				cooldownTime = Mathf.Round (cooldownTime * 100f) / 100f;
 				if (i == 0)
-					GUI.Label (new Rect (508, 485, 240, 30), cooldownTime.ToString());
+					GUI.Label (new Rect (488, 550, 240, 30), cooldownTime.ToString());
 				else if (i == 1)
-					GUI.Label (new Rect (590, 485, 240, 30), cooldownTime.ToString());
+					GUI.Label (new Rect (583, 550, 240, 30), cooldownTime.ToString());
 				else if (i == 2)
-					GUI.Label (new Rect (670, 485, 240, 30), cooldownTime.ToString());
+					GUI.Label (new Rect (672, 550, 240, 30), cooldownTime.ToString());
 				else if (i == 3)
-					GUI.Label (new Rect (752, 485, 240, 30), cooldownTime.ToString());
+					GUI.Label (new Rect (765, 550, 240, 30), cooldownTime.ToString());
 			}
 		}
+		GUI.contentColor = Color.black;
+		int level = playerGameObject.GetComponentInChildren<ILevelable> ().Level;
+		GUI.Label (new Rect (455, 602, 240, 300), level.ToString());
 	}
 }

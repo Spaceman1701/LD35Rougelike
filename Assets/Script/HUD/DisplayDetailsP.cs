@@ -21,8 +21,8 @@ public class DisplayDetailsP : MonoBehaviour {
 		//Ability descriptions
 		if (showPassive == 1) 
 		{
-			GUI.Label (new Rect (875, 462, 240, 30), passive.Title);
-			GUI.Label (new Rect (875, 480, 240, 300), passive.Description);
+			GUI.Label(new Rect(903, 523, 240, 30), passive.Title);
+			GUI.Label(new Rect(903, 542, 240, 300), passive.Description);
 		}
 	}
 }
