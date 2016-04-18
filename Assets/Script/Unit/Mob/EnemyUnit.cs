@@ -28,6 +28,8 @@ public class EnemyUnit : Unit {
         RotateToTarget((playerLoc - transform.position).normalized);
     }
 
+
+
     private void RotateToTarget(Vector2 direction)
 	{
 		float dir = 90 + Mathf.Atan2(direction.y, direction.x) * 180 / Mathf.PI;

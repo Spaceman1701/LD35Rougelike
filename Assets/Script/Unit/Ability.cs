@@ -23,6 +23,9 @@ public abstract class Ability : MonoBehaviour, ILevelable {
 
     public abstract void ForceLoadIcon();
 
+    public int staminaCost;
+    public int healthCost;
+
     private Sprite icon;
 
     public void loadIcon(String name)
@@ -104,6 +107,14 @@ public abstract class Ability : MonoBehaviour, ILevelable {
         get
         {
             return icon;
+        }
+    }
+
+    public int StaminaCost
+    {
+        get
+        {
+            return staminaCost;
         }
     }
 
