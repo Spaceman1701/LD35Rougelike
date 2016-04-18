@@ -5,7 +5,6 @@ using UnityEngine.UI;
 public class HUDManager : MonoBehaviour {
 
 	public GameObject playerGameObject;
-	public Texture EmptyAbility;
 
     public Button ability1button;
     public Button ability2button;
@@ -85,5 +84,3 @@ public class HUDManager : MonoBehaviour {
 		}
 	}
 }
-
-//Use the array of abilities to change the text box.  On mouseover on a button, call the show description function on this and pass which ability it is.  Then create a text box using the ability at that index in the array
