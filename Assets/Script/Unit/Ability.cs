@@ -2,7 +2,6 @@
 using System.Collections;
 using System;
 
-[RequireComponent (typeof(PlayerUnit))]
 public abstract class Ability : MonoBehaviour, ILevelable {
 
     private const string DEFAULT_ABILITY_FOLDER = "Ability/"; 

@@ -30,39 +30,66 @@ public class PlayerUnit : Unit {
         HandleAbilityInput();
     }
 
+    public Ability Ability1
+    {
+        get
+        {
+            return GetComponentInChildren<Ability1>().ability;
+        }
+    }
+
+    public Ability Ability2
+    {
+        get
+        {
+            return GetComponentInChildren<Ability2>().ability;
+        }
+    }
+
+    public Ability Ability3
+    {
+        get
+        {
+            return GetComponentInChildren<Ability3>().ability;
+        }
+    }
+
+    public Ability Ability4
+    {
+        get
+        {
+            return GetComponentInChildren<Ability4>().ability;
+        }
+    }
 
     private void HandleAbilityInput()
     {
         if (Input.GetButtonDown("Ability1"))
         {
-            if (abilityOne != null)
+            if (Ability1 != null)
             {
-                abilityOne.OnCast();
+                Ability1.OnCast();
             }
         }
         if (Input.GetButtonDown("Ability2"))
         {
-            if (abilityTwo != null)
+            if (Ability2 != null)
             {
-                abilityTwo.OnCast();
+                Ability2.OnCast();
             }
         }
         if (Input.GetButtonDown("Ability3"))
         {
-            if (abilityThree != null)
+            if (Ability3 != null)
             {
-                abilityThree.OnCast();
+                Ability3.OnCast();
             }
         }
         if (Input.GetButtonDown("Ability4"))
         {
-            if (abilityFour != null) { 
-                abilityFour.OnCast();
+            if (Ability4 != null) {
+                Ability1.OnCast();
             }
-        }
-        if (Input.GetButtonDown("left_mouse_button"))
-        {
-
         }
     }
 
