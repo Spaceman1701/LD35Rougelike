@@ -15,7 +15,7 @@ public class HUDManager : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-		Ability[] abilities  = playerUnit.GetComponentsInChildren<Ability>();
+        Ability[] abilities = new Ability[] { playerUnit.Ability1, playerUnit.Ability2, playerUnit.Ability3, playerUnit.Ability4 };
 //		float[] abilityIconXLocations = new float[4] {(float)-206.33, (float)-37.8, (float)127.5, (float)296.0};
 //		float abilityIconYLocation = (float)-424.74;
 		Button[] buttons = new Button[4] {ability1button, ability2button, ability3button, ability4button};
@@ -49,17 +49,17 @@ public class HUDManager : MonoBehaviour {
 		healthBar.SetHealth ((int)playerUnit.GetComponent<PlayerUnit>().health, (int)playerUnit.GetComponent<PlayerUnit>().maxHealth);
 		staminaBar.SetStamina ((int)playerUnit.GetComponent<PlayerUnit>().stamina, (int)playerUnit.GetComponent<PlayerUnit>().maxStamina);
 
-		Ability[] abilities  = playerUnit.GetComponentsInChildren<Ability>();
-//		float[] abilityIconXLocations = new float[4] {(float)-206.33, (float)-37.8, (float)127.5, (float)296.0};
-//		float abilityIconYLocation = (float)-424.74;
-		Button[] buttons = new Button[4] {ability1button, ability2button, ability3button, ability4button};
+		Ability[] abilities  = new Ability[] { playerUnit.Ability1, playerUnit.Ability2, playerUnit.Ability3, playerUnit.Ability4 };
+        //		float[] abilityIconXLocations = new float[4] {(float)-206.33, (float)-37.8, (float)127.5, (float)296.0};
+        //		float abilityIconYLocation = (float)-424.74;
+        Button[] buttons = new Button[4] {ability1button, ability2button, ability3button, ability4button};
 
 		int length = abilities.Length;
 
 		//Ability cooldowns
 		for (int i = 0; i < length; i++)
 		{
-			if (abilities [i].cooldown == 0) 
+			if (abilities[i] != null && abilities [i].cooldown == 0) 
 			{
 				for (int j = 0; j < length; j++) 
 				{

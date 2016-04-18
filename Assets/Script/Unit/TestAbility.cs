@@ -25,7 +25,7 @@ public class TestAbility : Ability {
 
     public override void ForceLoadIcon()
     {
-        Debug.Log("FORCE LOAD CALLED");
+        //Debug.Log("FORCE LOAD CALLED");
         if (!IsIconLoaded())
         {
             loadIcon("TestAbility");
