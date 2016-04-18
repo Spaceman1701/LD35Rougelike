@@ -3,13 +3,21 @@ using System.Collections;
 
 public class AutoAttack : MonoBehaviour {
 
-    public Collider2D c;
+    public float aaSpeed;
+    public int autoDamage;
+
+    private float nextaa;
 
     void OnTriggerStay2D(Collider2D other)
     {
         if (Input.GetButtonDown("left_mouse_button"))
         {
-            Debug.Log("ado.lkjadskljsd");
+            nextaa = Time.time + aaSpeed;
+            if (other.GetComponentInParent<EnemyUnit>())
+            {
+                other.GetComponentInParent<EnemyUnit>().Damage(autoDamage);
+            }
         }
+
     }
 }

@@ -19,6 +19,7 @@ public class BoardManager : MonoBehaviour {
 
 	public int columns = 50;
 	public int rows = 50;
+    public int border = 20;
 
 
 	public Count wallCount = new Count (25, 60);
@@ -47,12 +48,12 @@ public class BoardManager : MonoBehaviour {
 	{
 		boardHolder = new GameObject ("Board").transform;
 
-		for (int x = -1; x < columns + 1; x++) 
+		for (int x = -1 - border; x < columns + border + 1; x++) 
 		{
-			for (int y = -1; y < rows + 1; y++) 
+			for (int y = -1 - border; y < rows + 1 + border; y++) 
 			{
 				GameObject toInstantiate = floorTiles [Random.Range (0, floorTiles.Length)];
-				if (x == -1 || x == columns || y == -1 || y == rows) 
+				if (((x == -1 || x == columns) && y >= -1 && y < rows+1) || ((y == -1 || y == rows) && x >= -1 && x <columns +1)) 
 				{
 					toInstantiate = outerWallTiles [Random.Range (0, outerWallTiles.Length)];
 				}
@@ -95,7 +96,5 @@ public class BoardManager : MonoBehaviour {
 	{
 		BoardSetup ();
 		InitializeList ();
-		LayoutObjectAtRandom (wallTiles, wallCount.minimum, wallCount.maximum);
-		Instantiate (exit, new Vector3 (columns - 1, rows - 1, 0f), Quaternion.identity);
 	}
 }
