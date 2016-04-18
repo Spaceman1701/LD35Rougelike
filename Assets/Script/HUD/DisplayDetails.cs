@@ -23,7 +23,6 @@ public class DisplayDetails : MonoBehaviour {
 	}
 
 	void OnGUI () {
-		GUI.Label (new Rect (x, y, 100, 200), "1.7");
 		length = abilities.Length;
 		//Ability descriptions
 		if (abilityIndex == 0 && abilityIndex < length) 
