@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class HUDManager : MonoBehaviour {
 
-	public GameObject playerGameObject;
+	public PlayerUnit playerUnit;
 
     public Button ability1button;
     public Button ability2button;
@@ -15,12 +15,12 @@ public class HUDManager : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-		Ability[] abilities  = playerGameObject.GetComponentsInChildren<Ability>();
+		Ability[] abilities  = playerUnit.GetComponentsInChildren<Ability>();
 //		float[] abilityIconXLocations = new float[4] {(float)-206.33, (float)-37.8, (float)127.5, (float)296.0};
 //		float abilityIconYLocation = (float)-424.74;
 		Button[] buttons = new Button[4] {ability1button, ability2button, ability3button, ability4button};
 
-		Passive[] passive = playerGameObject.GetComponentsInChildren<Passive>();
+		Passive[] passive = playerUnit.GetComponentsInChildren<Passive>();
 
 		int length = abilities.Length;
 		for (int i = 0; i < length; i++) 
@@ -46,10 +46,10 @@ public class HUDManager : MonoBehaviour {
 
 		HealthBar healthBar = GetComponent <HealthBar>();
 		StaminaBar staminaBar = GetComponent <StaminaBar>();
-		healthBar.SetHealth ((int)playerGameObject.GetComponent<PlayerUnit>().health, (int)playerGameObject.GetComponent<PlayerUnit>().maxHealth);
-		staminaBar.SetStamina ((int)playerGameObject.GetComponent<PlayerUnit>().stamina, (int)playerGameObject.GetComponent<PlayerUnit>().maxStamina);
+		healthBar.SetHealth ((int)playerUnit.GetComponent<PlayerUnit>().health, (int)playerUnit.GetComponent<PlayerUnit>().maxHealth);
+		staminaBar.SetStamina ((int)playerUnit.GetComponent<PlayerUnit>().stamina, (int)playerUnit.GetComponent<PlayerUnit>().maxStamina);
 
-		Ability[] abilities  = playerGameObject.GetComponentsInChildren<Ability>();
+		Ability[] abilities  = playerUnit.GetComponentsInChildren<Ability>();
 //		float[] abilityIconXLocations = new float[4] {(float)-206.33, (float)-37.8, (float)127.5, (float)296.0};
 //		float abilityIconYLocation = (float)-424.74;
 		Button[] buttons = new Button[4] {ability1button, ability2button, ability3button, ability4button};
