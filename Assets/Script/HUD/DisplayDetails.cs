@@ -56,10 +56,10 @@ public class DisplayDetails : MonoBehaviour {
             case 1:
                 ability = pu.Ability2;
                 break;
-            case 3:
+            case 2:
                 ability = pu.Ability3;
                 break;
-            case 4:
+            case 3:
                 ability = pu.Ability4;
                 break;
         }

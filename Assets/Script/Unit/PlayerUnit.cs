@@ -108,7 +108,7 @@ public class PlayerUnit : Unit {
         if (Input.GetButtonDown("Ability4"))
         {
             if (Ability4 != null) {
-                Ability1.OnCast();
+                Ability4.OnCast();
             }
         }
     }

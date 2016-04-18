@@ -4,7 +4,7 @@ using System;
 
 public class EkkoUlt : Ability {
 
-	public PlayerUnit playerUnit;
+	//public PlayerUnit playerUnit;
 
 	UltData[] arrayOfData = new UltData[40];
 	int queueHead = 0;
@@ -41,7 +41,11 @@ public class EkkoUlt : Ability {
 	// Use this for initialization
 	void Start () {
 		//loadIcon("TestAbility");
-		InvokeRepeating ("ultDataUpdate", 0f, .1f);
+        for (int i = 0; i < arrayOfData.Length; i ++)
+        {
+            arrayOfData[i] = new UltData();
+        }
+		InvokeRepeating ("UltDataUpdate", 0f, .1f);
 	}
 
 	void UltDataUpdate()
@@ -50,7 +54,7 @@ public class EkkoUlt : Ability {
 		float currentStamina = playerUnit.GetComponent<PlayerUnit> ().stamina;
 		Vector3 currentTransform = playerUnit.GetComponent<PlayerUnit> ().transform.position;
 		
-		Ability[] abilities = new Ability[] { playerUnit.Ability1, playerUnit.Ability2, playerUnit.Ability3, playerUnit.Ability4 };
+		Ability[] abilities = new Ability[] { playerUnit.Ability1, playerUnit.Ability2, playerUnit.Ability3};
 
 		int length = abilities.Length;
 		for (int i = 0; i < length; i++) 
@@ -118,7 +122,7 @@ public class EkkoUlt : Ability {
 	{
 		get
 		{
-			return "Teleport back to your location 4 seconds prior.  Cooldowns, health, and stamina are set to their previous values.";
+			return "Transports you 4 seconds back in time";
 		}
 	}
 }
