@@ -40,6 +40,7 @@ public abstract class Unit : MonoBehaviour, ILevelable {
 	// Update is called once per frame
 	void Update()
     {
+        HandleAnimation();
         if (health <= 0)
         {
             ZeroHealthListener[] listeners = GetComponentsInChildren<ZeroHealthListener>();
@@ -75,7 +76,7 @@ public abstract class Unit : MonoBehaviour, ILevelable {
         Animate[] moveAnimation = GetComponentsInChildren<Animate>();
         foreach (Animate a in moveAnimation)
         {
-            a.StartAnimate();
+            //a.StartAnimate();
         }
     }
 
@@ -86,7 +87,23 @@ public abstract class Unit : MonoBehaviour, ILevelable {
         Animate[] moveAnimation = GetComponentsInChildren<Animate>();
         foreach (Animate a in moveAnimation)
         {
-            a.StopAnimate();
+            //a.StopAnimate();
+        }
+    }
+
+    private void HandleAnimation()
+    {
+        Animate[] animates = GetComponentsInChildren<Animate>();
+        foreach (Animate a in animates)
+        {
+            if (GetComponent<Rigidbody2D>().velocity.magnitude > 0)
+            {
+                a.StartAnimate();
+            }
+            else
+            {
+                a.StopAnimate();
+            }
         }
     }
 

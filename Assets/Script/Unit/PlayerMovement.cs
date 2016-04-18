@@ -50,7 +50,7 @@ public class PlayerMovement : MonoBehaviour {
             if (direction.magnitude < EPSILON)
             {
                 movingToWaypoint = false;
-                SetVelocity(new Vector2(0,0), 1);
+                SetVelocity(new Vector2(0,0), 0);
                 GetComponent<PlayerUnit>().EndMoving();
             } else
             {
@@ -59,31 +59,29 @@ public class PlayerMovement : MonoBehaviour {
                 SetVelocity(direction*speed, 0);
                 RotateToTarget(direction);
             }
+        } else if (!movingToWaypoint)
+        {
+            SetVelocity(new Vector2(0,0), 0);
         }
         if (Input.GetButtonDown("left_mouse_button"))
         {
-            Unit u = MouseOverUnit();
+            Unit u = GetComponent<PlayerUnit>().GetUnitUnderMouse();
             if (u != null)
             {
                 GetComponentInChildren<PlayerAutoAttack>().AttemptAuto(u);
             }
         }
-
 	}
 
-    private Unit MouseOverUnit()
-    {
-        RaycastHit2D hit = Physics2D.Raycast(new Vector2(Camera.main.ScreenToWorldPoint(Input.mousePosition).x,
-            Camera.main.ScreenToWorldPoint(Input.mousePosition).y), Vector2.zero, 0.0f);
-        Unit u = hit.rigidbody.transform.GetComponentInChildren<Unit>();
-        return u;
-    }
+    
 
-    private void RotateToTarget(Vector2 direction)
+    public void RotateToTarget(Vector2 direction)
     {
         float dir = 90 + Mathf.Atan2(direction.y, direction.x) * 180 / Mathf.PI;
-        playerBody.MoveRotation(dir + 10 * Time.deltaTime);
-        
+        //playerBody.MoveRotation(dir + 10 * Time.deltaTime);
+        SetAngle(dir, 0);
+        //SetImportance(0);
+
     }
 
 
@@ -114,7 +112,7 @@ public class PlayerMovement : MonoBehaviour {
         return false;
     }
 
-    public bool SetAngle(int angle, int importance)
+    public bool SetAngle(float angle, int importance)
     {
         if (importance >= currImportance)
         {

@@ -37,7 +37,8 @@ public class PlayerAutoAttack : AutoAttack {
             - new Vector2(transform.position.x, transform.position.y);
         direction.Normalize();
         PlayerMovement pm = GetComponent<PlayerMovement>();
-        pm.SetVelocity(direction * pm.speed, 5);
+        pm.SetVelocity(direction * pm.speed, 0);
+        pm.RotateToTarget(direction);
     }
 
     public void CancelFollow()

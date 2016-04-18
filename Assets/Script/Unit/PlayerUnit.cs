@@ -68,6 +68,21 @@ public class PlayerUnit : Unit {
         relativeMouse = mouseLoc - new Vector2(transform.position.x, transform.position.y);
     }
 
+    public Unit GetUnitUnderMouse()
+    {
+        RaycastHit2D hit = Physics2D.Raycast(new Vector2(Camera.main.ScreenToWorldPoint(Input.mousePosition).x,
+            Camera.main.ScreenToWorldPoint(Input.mousePosition).y), Vector2.zero, 0.0f);
+        if (hit.rigidbody != null)
+        {
+            Unit u = hit.rigidbody.transform.GetComponentInChildren<Unit>();
+            if (u != null)
+            {
+                return u;
+            }
+        }
+        return null;
+    }
+
     public Vector2 RelativeMouse
     {
         get
