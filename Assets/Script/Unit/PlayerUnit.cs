@@ -30,6 +30,26 @@ public class PlayerUnit : Unit {
         HandleAbilityInput();
     }
 
+    public bool UseStamina(float amount)
+    {
+        if (stamina >= amount)
+        {
+            stamina -= amount;
+            return true;
+        }
+        return false;
+    }
+
+    public bool UseHealth(float amount, float minHealthRemaining)
+    {
+        if (health-minHealthRemaining >= amount)
+        {
+            health -= amount;
+            return true;
+        }
+        return false;
+    }
+
     public Ability Ability1
     {
         get

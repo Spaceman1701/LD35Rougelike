@@ -3,12 +3,23 @@ using System.Collections;
 
 public class EnemyUnit : Unit {
 
+    private const float AACD_UPDATE_TIME = 0.1f;
+
 	private float speed = 1.5f;
 
     private PlayerUnit player;
 	private Vector2 waypoint;
 	public int currImportance;
 	private Rigidbody2D enemyBody;
+
+
+
+
+    public float attackCd;
+    public float currentAttackCd;
+    public float attackDamage;
+    public float range;
+    
 
     protected override void OnStart()
     {
@@ -22,10 +33,29 @@ public class EnemyUnit : Unit {
         Vector3 playerLoc = player.transform.position;
 		waypoint = playerLoc;
 		Vector2 direction = waypoint - new Vector2(transform.position.x, transform.position.y);
+        float distance = direction.magnitude;
 		direction.Normalize();
 		SetVelocity(direction*speed, 100);
 		SetImportance(0);
         RotateToTarget((playerLoc - transform.position).normalized);
+
+        if (distance < range && currentAttackCd == 0)
+        {
+            player.Damage(attackDamage);
+            currentAttackCd = attackCd;
+            InvokeRepeating("UpdateAACD", 0, 0.1f);
+        }
+    }
+
+
+    private void UpdateAACD()
+    {
+        currentAttackCd -= AACD_UPDATE_TIME;
+        if (currentAttackCd <= 0)
+        {
+            CancelInvoke("UpdateAACD");
+            currentAttackCd = 0;
+        }
     }
 
 

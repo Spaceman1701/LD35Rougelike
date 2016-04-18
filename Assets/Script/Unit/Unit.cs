@@ -20,6 +20,7 @@ public abstract class Unit : MonoBehaviour, ILevelable {
 
     public float cdrPercent;
 
+
     // Use this for initialization
     void Start()
     {
@@ -78,6 +79,8 @@ public abstract class Unit : MonoBehaviour, ILevelable {
         {
             //a.StartAnimate();
         }
+
+      
     }
 
     public void EndMoving()
