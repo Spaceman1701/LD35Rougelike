@@ -71,7 +71,7 @@ public class PlayerMovement : MonoBehaviour {
     {
         float dir = 90 + Mathf.Atan2(direction.y, direction.x) * 180 / Mathf.PI;
         //playerBody.MoveRotation(dir + 10 * Time.deltaTime);
-        SetAngle(dir, 1);
+        SetAngle(dir, importance);
         //SetImportance(0);
 
     }
