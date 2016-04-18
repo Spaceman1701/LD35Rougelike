@@ -50,13 +50,13 @@ public class HUDManager : MonoBehaviour {
 		Button[] buttons = new Button[4] {ability1button, ability2button, ability3button, ability4button};
 
 		int length = abilities.Length;
-		for (int i = 0; i < length; i++) 
+		for (int j = 0; j < length; j++) 
 		{
-			if (abilities[i] != null)
+			if (abilities[j] != null)
 			{
-				Debug.Log(abilities[i].Icon == null);
-				abilities[i].ForceLoadIcon();
-				buttons[i].image.overrideSprite = abilities[i].Icon;
+				Debug.Log(abilities[j].Icon == null);
+				abilities[j].ForceLoadIcon();
+				buttons[j].image.overrideSprite = abilities[j].Icon;
 
 				//GUI.Button (new Rect(-206.33f, -37.8f, 150, 150), abilities[i].Icon.texture); //THERE IS NO CURRENT TEXTURE ACCESSED THIS WAY
 			}
@@ -66,7 +66,15 @@ public class HUDManager : MonoBehaviour {
 			}
 		}
 
+		//Ability cooldowns
+		for (int i = 0; i < length; i++)
+		{
+			if (abilities [i].cooldown > 0) 
+			{
 
-
+			}
+		}
 	}
 }
+
+//Use the array of abilities to change the text box.  On mouseover on a button, call the show description function on this and pass which ability it is.  Then create a text box using the ability at that index in the array
