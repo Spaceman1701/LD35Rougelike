@@ -60,6 +60,10 @@ public class PlayerUnit : Unit {
                 abilityFour.OnCast();
             }
         }
+        if (Input.GetButtonDown("left_mouse_button"))
+        {
+
+        }
     }
 
     private void UpdateRelativeMouse()

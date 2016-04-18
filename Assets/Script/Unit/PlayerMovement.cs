@@ -35,7 +35,6 @@ public class PlayerMovement : MonoBehaviour {
 	void Update () {
         if (Input.GetButtonDown("right_mouse_button"))
         {
-            GetComponentInChildren<PlayerAutoAttack>().CancelFollow();
             waypoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             Vector2 direction = waypoint - new Vector2(transform.position.x, transform.position.y);
             direction.Normalize();
@@ -50,36 +49,29 @@ public class PlayerMovement : MonoBehaviour {
             if (direction.magnitude < EPSILON)
             {
                 movingToWaypoint = false;
-                SetVelocity(new Vector2(0,0), 0);
+                SetVelocity(new Vector2(0,0), 2);
                 GetComponent<PlayerUnit>().EndMoving();
             } else
             {
 
                 direction.Normalize();
                 SetVelocity(direction*speed, 0);
-                RotateToTarget(direction);
+                RotateToTarget(direction, 0);
             }
         } else if (!movingToWaypoint)
         {
-            SetVelocity(new Vector2(0,0), 0);
-        }
-        if (Input.GetButtonDown("left_mouse_button"))
-        {
-            Unit u = GetComponent<PlayerUnit>().GetUnitUnderMouse();
-            if (u != null)
-            {
-                GetComponentInChildren<PlayerAutoAttack>().AttemptAuto(u);
-            }
+            SetVelocity(new Vector2(0,0), 2);
+            SetImportance(0);
         }
 	}
 
     
 
-    public void RotateToTarget(Vector2 direction)
+    public void RotateToTarget(Vector2 direction, int importance)
     {
         float dir = 90 + Mathf.Atan2(direction.y, direction.x) * 180 / Mathf.PI;
         //playerBody.MoveRotation(dir + 10 * Time.deltaTime);
-        SetAngle(dir, 0);
+        SetAngle(dir, 1);
         //SetImportance(0);
 
     }
