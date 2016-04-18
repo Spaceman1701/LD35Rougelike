@@ -20,7 +20,7 @@ public class HUDManager : MonoBehaviour {
 //		float abilityIconYLocation = (float)-424.74;
 		Button[] buttons = new Button[4] {ability1button, ability2button, ability3button, ability4button};
 
-		Passive[] passive = playerUnit.GetComponentsInChildren<Passive>();
+		Passive passive = playerUnit.GetComponentInChildren<Passive>();
 
 		int length = abilities.Length;
 		for (int i = 0; i < length; i++) 
@@ -38,7 +38,7 @@ public class HUDManager : MonoBehaviour {
 				//GUI.Button (new Rect(abilityIconXLocations[i], abilityIconYLocation, 150, 150), EmptyAbility); 
 			}
 		}
-		passiveButton.image.overrideSprite = passive [0].Icon;
+		//passiveButton.image.overrideSprite = passive.Icon;
 	}
 	
 	// Update is called once per frame

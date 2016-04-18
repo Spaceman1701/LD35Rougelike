@@ -3,7 +3,7 @@ using System.Collections;
 
 public class DisplayDetails : MonoBehaviour {
 
-	Ability[] abilities;
+	Ability[] abilities = new Ability[4];
 	int length;
 
 	int abilityIndex = -1;
@@ -14,7 +14,8 @@ public class DisplayDetails : MonoBehaviour {
 
 	void Start()
 	{
-		abilities = playerGameObject.GetComponentsInChildren<Ability> ();
+        PlayerUnit pu = playerGameObject.GetComponent<PlayerUnit>();
+		abilities = new Ability[] {pu.Ability1, pu.Ability2, pu.Ability3, pu.Ability4};
 		length = abilities.Length;
 	}
 
@@ -22,44 +23,28 @@ public class DisplayDetails : MonoBehaviour {
 		abilityIndex = index;
 	}
 
+    private void DrawAbilityText(int abilityIndex)
+    {
+        if (abilities[abilityIndex] != null)
+        {
+            string abilityDesc = abilities[abilityIndex].Description;
+            string abilityTitle = abilities[abilityIndex].Title;
+
+            GUI.Label(new Rect(875, 462, 240, 30), abilityTitle);
+            GUI.Label(new Rect(875, 480, 240, 300), abilityDesc);
+        }
+    }
+
 	void OnGUI () {
 		length = abilities.Length;
-		//Ability descriptions
-		if (abilityIndex == 0 && abilityIndex < length) 
-		{
-			string abilityDesc = abilities [abilityIndex].Description;
-			string abilityTitle = abilities [abilityIndex].Title;
+        //Ability descriptions
+        if (abilityIndex != -1)
+        {
+            DrawAbilityText(abilityIndex);
 
-			GUI.Label (new Rect (875, 462, 240, 30), abilityTitle);
-			GUI.Label (new Rect (875, 480, 240, 300), abilityDesc);
-		}
-		else if (abilityIndex == 1 && abilityIndex < length) 
-		{
-			string abilityDesc = abilities [abilityIndex].Description;
-			string abilityTitle = abilities [abilityIndex].Title;
-
-			GUI.Label (new Rect (875, 462, 240, 30), abilityTitle);
-			GUI.Label (new Rect (875, 480, 240, 300), abilityDesc);
-		}
-		else if (abilityIndex == 2 && abilityIndex < length) 
-		{
-			string abilityDesc = abilities [abilityIndex].Description;
-			string abilityTitle = abilities [abilityIndex].Title;
-
-			GUI.Label (new Rect (875, 462, 240, 30), abilityTitle);
-			GUI.Label (new Rect (875, 480, 240, 300), abilityDesc);
-		}
-		else if (abilityIndex == 3 && abilityIndex < length) 
-		{
-			string abilityDesc = abilities [abilityIndex].Description;
-			string abilityTitle = abilities [abilityIndex].Title;
-
-			GUI.Label (new Rect (875, 462, 240, 30), abilityTitle);
-			GUI.Label (new Rect (875, 480, 240, 300), abilityDesc);
-		}
-
-		for (int i = 0; i < length; i++) {
-			if (abilities [i].cooldown > 0){
+        }
+        for (int i = 0; i < length; i++) {
+			if (abilities[i] != null && abilities [i].cooldown > 0){
 				float cooldownTime = abilities [i].cooldown;
 				cooldownTime = Mathf.Round (cooldownTime * 100f) / 100f;
 				if (i == 0)

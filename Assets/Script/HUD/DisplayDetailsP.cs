@@ -6,13 +6,11 @@ public class DisplayDetailsP : MonoBehaviour {
 	public GameObject playerGameObject;
 
 	int showPassive = 0;
-	Passive[] passiveAr;
 	Passive passive;
 
 	void Start()
 	{
-		passiveAr = playerGameObject.GetComponentsInChildren<Passive> ();
-		passive = passiveAr [0];
+		passive = playerGameObject.GetComponentInChildren<Passive> ();
 	}
 
 	public void showDetails(int show){
