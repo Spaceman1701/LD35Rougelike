@@ -6,46 +6,47 @@ public class AutoAttack : MonoBehaviour {
     public float aaSpeed;
     public int autoDamage;
 
-    private float aaCooldown;
-    private const float COOLDOWN_UPATE_RATE = 0.1f;
-    private PlayerMovement movement;
+    private float nextaa;
 
-    void Start()
-    {
-        movement = GetComponent<PlayerMovement>();
-    }
     void OnTriggerStay2D(Collider2D other)
     {
-        if (Input.GetButton("left_mouse_button"))
+        if (Input.GetButtonDown("left_mouse_button"))
         {
-        if(OffCooldown())
+            nextaa = Time.time + aaSpeed;
+            if (other.GetComponentInParent<EnemyUnit>() != null)
             {
-                StartCooldown();
-                if (other.GetComponentInParent<EnemyUnit>())
+                other.GetComponentInParent<EnemyUnit>().Damage(autoDamage);
+            } else if (other.GetComponentInChildren<Ability>() != null)
+            {
+                //Head a;
+                if (other.GetComponentInChildren<LeftArm>() != null)
                 {
-                    other.GetComponentInParent<EnemyUnit>().Damage(autoDamage);
+                    LeftArm a = GetComponentInChildren<LeftArm>();
+                    Destroy(a.gameObject);
+                    other.transform.parent = gameObject.transform;
+
+                    other.transform.parent = gameObject.transform;
+                    other.transform.localPosition = new Vector3(0, 0, 0);
+                    other.transform.localRotation = Quaternion.identity;
+                } else if (other.GetComponentInChildren<RightArm>() != null )
+                {
+                    RightArm a = GetComponentInChildren<RightArm>();
+                    Destroy(a.gameObject);
+                    other.transform.parent = gameObject.transform;
+
+                    other.transform.parent = gameObject.transform;
+                    other.transform.localPosition = new Vector3(0, 0, 0);
+                    other.transform.localRotation = Quaternion.identity;
+                } else if ((other.GetComponentInChildren<Head>()) != null )
+                {
+                    Head a = GetComponentInChildren<Head>();
+                    Destroy(a.gameObject);
+                    other.transform.parent = gameObject.transform;
+                    other.transform.localPosition = new Vector3(0, 0, 0);
+                    other.transform.localRotation = Quaternion.identity;
                 }
             }
         }
-    }
-    public void StartCooldown()
-    {
-        aaCooldown = aaSpeed;
-        InvokeRepeating("IncrementCooldown", 0, COOLDOWN_UPATE_RATE);
-    }
 
-    private void IncrementCooldown()
-    {
-       aaCooldown -= COOLDOWN_UPATE_RATE;
-        if (aaCooldown <= 0.0)
-        {
-            CancelInvoke("IncrementCooldown");
-            aaCooldown = 0;
-        }
-    }
-
-    public bool OffCooldown()
-    {
-        return aaCooldown == 0;
     }
 }

@@ -12,5 +12,11 @@ public class Head : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         i = 0;
+
+        if (GetComponentInParent<Unit>() != null)
+        {
+            //transform.position = new Vector3(0, 0, 0);
+            //transform.rotation = Quaternion.identity;
+        }
 	}
 }

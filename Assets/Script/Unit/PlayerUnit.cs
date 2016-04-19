@@ -54,6 +54,10 @@ public class PlayerUnit : Unit {
     {
         get
         {
+            if (GetComponentInChildren<Ability1>() == null)
+            {
+                return null;
+            }
             return GetComponentInChildren<Ability1>().ability;
         }
     }
@@ -62,6 +66,10 @@ public class PlayerUnit : Unit {
     {
         get
         {
+            if (GetComponentInChildren<Ability2>() == null)
+            {
+                return null;
+            }
             return GetComponentInChildren<Ability2>().ability;
         }
     }
@@ -70,6 +78,10 @@ public class PlayerUnit : Unit {
     {
         get
         {
+            if (GetComponentInChildren<Ability3>() == null)
+            {
+                return null;
+            }
             return GetComponentInChildren<Ability3>().ability;
         }
     }
@@ -78,6 +90,10 @@ public class PlayerUnit : Unit {
     {
         get
         {
+            if (GetComponentInChildren<Ability4>() == null)
+            {
+                return null;
+            }
             return GetComponentInChildren<Ability4>().ability;
         }
     }
