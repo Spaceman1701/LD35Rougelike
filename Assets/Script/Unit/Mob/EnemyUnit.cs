@@ -12,13 +12,14 @@ public class EnemyUnit : Unit {
 	public int currImportance;
 	private Rigidbody2D enemyBody;
 
-
-
+    public GameObject DropPrefab;
 
     public float attackCd;
     public float currentAttackCd;
     public float attackDamage;
     public float range;
+
+    public GameObject[] abilities;
     
 
     protected override void OnStart()
@@ -128,7 +129,41 @@ public class EnemyUnit : Unit {
     }
     protected override void OnDeath()
     {
+        GameObject o = (GameObject)Instantiate(DropPrefab, transform.position, Quaternion.identity);
 
+        GameObject ability = GetRandomAbility();
+
+        int random = Random.Range(0, 3);
+
+        Transform comp = null;
+
+        switch(random)
+        {
+            case 0:
+                LeftArm a = GetComponentInChildren<LeftArm>();
+                comp = a.transform;
+                break;
+            case 1:
+                Head h = GetComponentInChildren<Head>();
+                comp = h.transform;
+                break;
+            case 2:
+                RightArm r =GetComponentInChildren<RightArm>();
+                comp = r.transform;
+                break;
+        }
+
+        Debug.Log("ded");
+
+        ability.transform.parent= comp;
+        comp.transform.SetParent(o.transform);
+        Destroy(gameObject);
+    }
+
+    private GameObject GetRandomAbility()
+    {
+        int i = Random.Range(0, abilities.Length);
+        return Instantiate(abilities[i]);
     }
 
 }
